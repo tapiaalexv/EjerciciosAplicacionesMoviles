@@ -35,6 +35,8 @@ class LoginActivity : AppCompatActivity() {
             //Validaciones de datos requeridos y formatos
             if(!ValidarDatosRequeridos())
                 return@setOnClickListener
+            //Guardar datos en preferencias.
+            GuardarDatosEnPreferencias() //Lab 04
             //Si pasa validación de datos requeridos, ir a pantalla principal
             val intencion = Intent(this, MainActivity::class.java)
             intencion.putExtra(EXTRA_LOGIN, email)
@@ -67,6 +69,19 @@ class LoginActivity : AppCompatActivity() {
         }
         return true
     }
+    private fun GuardarDatosEnPreferencias(){ //Lab 04
+        val email = editTextEmail.text.toString()
+        val clave = editTextPassword.text.toString()
+        val listadoAGrabar:Pair<String,String>
+        if(checkBoxRecordarme.isChecked){
+            listadoAGrabar = email to clave
+        }
+        else{
+            listadoAGrabar ="" to ""
+        }
+        manejadorArchivo.SaveInformation(listadoAGrabar)
+    }
+
     private fun LeerDatosDePreferencias(){ //Lab 04
         val listadoLeido = manejadorArchivo.ReadInformation()
         if(listadoLeido.first != null){
