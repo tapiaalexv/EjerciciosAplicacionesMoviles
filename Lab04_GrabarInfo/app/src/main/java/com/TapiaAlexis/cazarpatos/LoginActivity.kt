@@ -16,11 +16,12 @@ class LoginActivity : AppCompatActivity() {
     lateinit var buttonLogin: Button
     lateinit var buttonNewUser:Button
     lateinit var mediaPlayer: MediaPlayer
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         //Inicialización de variables
-        manejadorArchivo = SharedPreferencesManager(this) //Lab 04
+        manejadorArchivo = EncryptedSharedPreferencesManager(this) //Lab 04
         editTextEmail = findViewById(R.id.editTextEmail)
         editTextPassword = findViewById(R.id.editTextPassword)
         buttonLogin = findViewById(R.id.buttonLogin)
