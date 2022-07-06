@@ -5,9 +5,12 @@ import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 
 class LoginActivity : AppCompatActivity() {
+    lateinit var manejadorArchivo: FileHandler //Lab04
+    lateinit var checkBoxRecordarme: CheckBox //Lab04
     lateinit var editTextEmail: EditText
     lateinit var editTextPassword:EditText
     lateinit var buttonLogin: Button
@@ -17,10 +20,14 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         //Inicialización de variables
+        manejadorArchivo = SharedPreferencesManager(this) //Lab 04
         editTextEmail = findViewById(R.id.editTextEmail)
         editTextPassword = findViewById(R.id.editTextPassword)
         buttonLogin = findViewById(R.id.buttonLogin)
         buttonNewUser = findViewById(R.id.buttonNewUser)
+        checkBoxRecordarme = findViewById(R.id.checkBoxRecordarme) //lab 04
+
+        LeerDatosDePreferencias() //Lab 04
         //Eventos clic
         buttonLogin.setOnClickListener {
             val email = editTextEmail.text.toString()
@@ -60,6 +67,15 @@ class LoginActivity : AppCompatActivity() {
         }
         return true
     }
+    private fun LeerDatosDePreferencias(){ //Lab 04
+        val listadoLeido = manejadorArchivo.ReadInformation()
+        if(listadoLeido.first != null){
+            checkBoxRecordarme.isChecked = true
+        }
+        editTextEmail.setText ( listadoLeido.first )
+        editTextPassword.setText ( listadoLeido.second )
+    }
+
     override fun onDestroy() {
         mediaPlayer.release()
         super.onDestroy()
