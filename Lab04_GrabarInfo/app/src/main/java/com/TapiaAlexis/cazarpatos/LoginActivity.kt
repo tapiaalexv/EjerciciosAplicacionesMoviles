@@ -20,11 +20,13 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
         /*Inicialización de variables*/
+
         //manejadorArchivo = EncryptedSharedPreferencesManager(this) //Lab 04 - Encriptacion
         //manejadorArchivo = SharedPreferencesManager(this) //Lab 04 - Normal
         manejadorArchivo = FileExternalManager(this) //Lab 04 - Almacenamiento Externo
-        //manejadorArchivo = FileInternalManager(this) //Lab 04 - Almacenamiento Interno
+
         editTextEmail = findViewById(R.id.editTextEmail)
         editTextPassword = findViewById(R.id.editTextPassword)
         buttonLogin = findViewById(R.id.buttonLogin)
@@ -40,8 +42,10 @@ class LoginActivity : AppCompatActivity() {
             //Validaciones de datos requeridos y formatos
             if(!ValidarDatosRequeridos())
                 return@setOnClickListener
+
             //Guardar datos en preferencias.
             GuardarDatosEnPreferencias() //Lab 04
+
             //Si pasa validación de datos requeridos, ir a pantalla principal
             val intencion = Intent(this, MainActivity::class.java)
             intencion.putExtra(EXTRA_LOGIN, email)
