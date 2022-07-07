@@ -20,8 +20,11 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        //Inicialización de variables
-        manejadorArchivo = EncryptedSharedPreferencesManager(this) //Lab 04
+        /*Inicialización de variables*/
+        //manejadorArchivo = EncryptedSharedPreferencesManager(this) //Lab 04 - Encriptacion
+        //manejadorArchivo = SharedPreferencesManager(this) //Lab 04 - Normal
+        manejadorArchivo = FileExternalManager(this) //Lab 04 - Almacenamiento Externo
+        //manejadorArchivo = FileInternalManager(this) //Lab 04 - Almacenamiento Interno
         editTextEmail = findViewById(R.id.editTextEmail)
         editTextPassword = findViewById(R.id.editTextPassword)
         buttonLogin = findViewById(R.id.buttonLogin)
@@ -29,6 +32,7 @@ class LoginActivity : AppCompatActivity() {
         checkBoxRecordarme = findViewById(R.id.checkBoxRecordarme) //lab 04
 
         LeerDatosDePreferencias() //Lab 04
+
         //Eventos clic
         buttonLogin.setOnClickListener {
             val email = editTextEmail.text.toString()
