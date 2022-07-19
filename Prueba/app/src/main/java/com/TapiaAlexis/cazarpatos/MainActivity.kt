@@ -5,15 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
-import android.view.Menu
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import com.google.android.material.snackbar.Snackbar
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-
     lateinit var textViewUsuario: TextView
     lateinit var textViewContador: TextView
     lateinit var textViewTiempo: TextView
@@ -34,10 +31,7 @@ class MainActivity : AppCompatActivity() {
         //Obtener el usuario de pantalla login
         val extras = intent.extras ?: return
         val usuario = extras.getString(EXTRA_LOGIN) ?:"Unknown"
-        val soloNombre = usuario.split("@")
-        //println("---"+soloNombre+"----");
-        //println("*****  ->" + soloNombre[0])
-        textViewUsuario.setText(soloNombre[0])
+        textViewUsuario.setText(usuario)
 
         //Determina el ancho y largo de pantalla
         inicializarPantalla()
@@ -56,7 +50,6 @@ class MainActivity : AppCompatActivity() {
                 moverPato()
             }, 500)
         }
-
     }
     private fun inicializarPantalla() {
         // 1. Obtenemos el tamaño de la pantalla del dispositivo
@@ -93,8 +86,7 @@ class MainActivity : AppCompatActivity() {
     }
     private fun mostrarDialogoGameOver() {
         val builder = AlertDialog.Builder(this)
-        val negativeButton = builder
-            .setIcon(getDrawable(R.drawable.ic_baseline_info_24))
+        builder
             .setMessage("Felicidades!!\nHas conseguido cazar $contador patos")
             .setTitle("Fin del juego")
             .setPositiveButton("Reiniciar",
@@ -114,9 +106,5 @@ class MainActivity : AppCompatActivity() {
         textViewContador.setText(contador.toString())
         moverPato()
         inicializarCuentaRegresiva()
-    }
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_bar,menu)
-        return true
     }
 }

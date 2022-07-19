@@ -2,22 +2,19 @@ package com.TapiaAlexis.cazarpatos
 
 import android.content.Intent
 import android.media.MediaPlayer
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Patterns
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
-import androidx.appcompat.app.AppCompatActivity
-import java.util.regex.Pattern
-
 
 class LoginActivity : AppCompatActivity() {
     lateinit var manejadorArchivo: FileHandler //Lab04
     lateinit var checkBoxRecordarme: CheckBox //Lab04
     lateinit var editTextEmail: EditText
-    lateinit var editTextPassword: EditText
+    lateinit var editTextPassword:EditText
     lateinit var buttonLogin: Button
-    lateinit var buttonNewUser: Button
+    lateinit var buttonNewUser:Button
     lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,32 +40,25 @@ class LoginActivity : AppCompatActivity() {
             val email = editTextEmail.text.toString()
             val clave = editTextPassword.text.toString()
             //Validaciones de datos requeridos y formatos
-            if (!ValidarDatosRequeridos())
+            if(!ValidarDatosRequeridos())
                 return@setOnClickListener
 
             //Guardar datos en preferencias.
             GuardarDatosEnPreferencias() //Lab 04
-            if(!validarEmail(email)){
-                editTextEmail.setError("Email no válido")
-            }else{
-                if (editTextPassword.text.toString().length < 8) {
-                    editTextPassword.setError("La contraseña mínnima 8 caracteres")
-                } else {
-                    //Si pasa validación de datos requeridos, ir a pantalla principal
-                    val intencion = Intent(this, MainActivity::class.java)
-                    intencion.putExtra(EXTRA_LOGIN, email)
-                    startActivity(intencion)
-                }
-            }
+
+            //Si pasa validación de datos requeridos, ir a pantalla principal
+            val intencion = Intent(this, MainActivity::class.java)
+            intencion.putExtra(EXTRA_LOGIN, email)
+            startActivity(intencion)
         }
-        buttonNewUser.setOnClickListener {
+        buttonNewUser.setOnClickListener{
 
         }
-        mediaPlayer = MediaPlayer.create(this, R.raw.title_screen)
+        mediaPlayer=MediaPlayer.create(this, R.raw.title_screen)
         mediaPlayer.start()
     }
 
-    private fun ValidarDatosRequeridos(): Boolean {
+    private fun ValidarDatosRequeridos():Boolean{
         val email = editTextEmail.text.toString()
         val clave = editTextPassword.text.toString()
         if (email.isEmpty()) {
@@ -88,31 +78,26 @@ class LoginActivity : AppCompatActivity() {
         }
         return true
     }
-
-    private fun GuardarDatosEnPreferencias() { //Lab 04
+    private fun GuardarDatosEnPreferencias(){ //Lab 04
         val email = editTextEmail.text.toString()
         val clave = editTextPassword.text.toString()
-        val listadoAGrabar: Pair<String, String>
-        if (checkBoxRecordarme.isChecked) {
+        val listadoAGrabar:Pair<String,String>
+        if(checkBoxRecordarme.isChecked){
             listadoAGrabar = email to clave
-        } else {
-            listadoAGrabar = "" to ""
+        }
+        else{
+            listadoAGrabar ="" to ""
         }
         manejadorArchivo.SaveInformation(listadoAGrabar)
     }
 
-    private fun LeerDatosDePreferencias() { //Lab 04
+    private fun LeerDatosDePreferencias(){ //Lab 04
         val listadoLeido = manejadorArchivo.ReadInformation()
-        if (listadoLeido.first != null) {
+        if(listadoLeido.first != null){
             checkBoxRecordarme.isChecked = true
         }
-        editTextEmail.setText(listadoLeido.first)
-        editTextPassword.setText(listadoLeido.second)
-    }
-
-    private fun validarEmail(email: String): Boolean {
-        val pattern: Pattern = Patterns.EMAIL_ADDRESS
-        return pattern.matcher(email).matches()
+        editTextEmail.setText ( listadoLeido.first )
+        editTextPassword.setText ( listadoLeido.second )
     }
 
     override fun onDestroy() {
