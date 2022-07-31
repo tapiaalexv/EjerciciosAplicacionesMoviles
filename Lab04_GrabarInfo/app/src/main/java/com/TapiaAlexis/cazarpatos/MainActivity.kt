@@ -1,11 +1,14 @@
 package com.TapiaAlexis.cazarpatos
 
+import android.content.Intent
 import android.media.MediaPlayer
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -119,4 +122,28 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_bar,menu)
         return true
     }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.NuevoJuego->{
+                reiniciarJuego()
+            }
+            R.id.JugarOnline->{
+                val intentWeb = Intent()
+                intentWeb.action = Intent.ACTION_VIEW
+                intentWeb.data = Uri.parse("https://duckhuntjs.com/")
+                startActivity(intentWeb)
+            }
+            R.id.Salir->{
+                contadorTiempo.cancel()
+                finishAffinity()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }
