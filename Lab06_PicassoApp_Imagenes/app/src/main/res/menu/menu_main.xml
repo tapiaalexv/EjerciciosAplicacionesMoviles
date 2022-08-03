@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.tapiaalexis.picassoapp.MainActivity">
+    <item
+        android:id="@+id/action_LinksUrl"
+        android:orderInCategory="100"
+        android:title="@string/action_LinksUrl"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_LinksRecursos"
+        android:orderInCategory="100"
+        android:title="@string/action_LinksRecursos"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_LinksMemoriaExterna"
+        android:orderInCategory="100"
+        android:title="@string/action_LinksMemoriaExterna"
+        app:showAsAction="never" />
+
+</menu>
