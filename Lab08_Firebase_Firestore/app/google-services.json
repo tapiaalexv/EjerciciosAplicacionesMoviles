@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "878333523748",
+    "project_id": "cazarpatos-7c0e8",
+    "storage_bucket": "cazarpatos-7c0e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878333523748:android:d072b0d9e415f2f7c0e5b1",
+        "android_client_info": {
+          "package_name": "com.TapiaAlexis.cazarpatos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "878333523748-ru7jup1q9tml7u22vjp13u4ci1vol01n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-K4QNUnSzyA0ANcOIJA8ztdLI1Jjtv6E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "878333523748-ru7jup1q9tml7u22vjp13u4ci1vol01n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
